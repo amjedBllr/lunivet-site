@@ -1,0 +1,28 @@
+packages:
+  "framer-motion": "For premium page transitions, scroll reveals, and the interactive product carousel"
+  "clsx": "Utility for constructing className strings conditionally"
+  "tailwind-merge": "Utility to merge Tailwind classes without style conflicts"
+  "react-hook-form": "For robust handling of the contact and checkout forms"
+  "@hookform/resolvers": "Zod resolver for form validation"
+  "zod": "Schema validation for the forms"
+
+images:
+  - path: "artifacts/lunivet/public/images/hero-bg.png"
+    description: "Dark navy midnight gradient background with subtle glowing crescent moon and ethereal stardust particles, premium luxury aesthetic, very clean and minimalist"
+    aspect_ratio: "16:9"
+  - path: "artifacts/lunivet/public/images/about-hero.png"
+    description: "Elegant fluffy cat and golden retriever dog sitting together peacefully in a premium modern minimalist living room bathed in soft moonlight, high end photography"
+    aspect_ratio: "16:9"
+  - path: "artifacts/lunivet/public/images/bottle-lavender.png"
+    description: "Elegant minimalist pet shampoo pump bottle, blank white label, soft warm yellow accent background, clean studio lighting, realistic product photography"
+    aspect_ratio: "1:1"
+  - path: "artifacts/lunivet/public/images/bottle-ocean.png"
+    description: "Elegant minimalist pet shampoo pump bottle, blank white label, soft sky blue accent background, clean studio lighting, realistic product photography"
+    aspect_ratio: "1:1"
+  - path: "artifacts/lunivet/public/images/bottle-citrus.png"
+    description: "Elegant minimalist pet shampoo pump bottle, blank white label, soft mint green accent background, clean studio lighting, realistic product photography"
+    aspect_ratio: "1:1"
+
+notes:
+  - Forms are frontend-only as requested, simulating a backend with a short timeout and success toasts.
+  - The app uses framer-motion for a premium, native-feeling experience.
