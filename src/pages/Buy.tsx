@@ -6,13 +6,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { PageLayout } from "@/components/layout/PageLayout";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Card } from "@/components/ui/card";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { products } from "@/components/sections/ProductCarousel";
 import { useCreateOrder, orderSchema, type OrderInput } from "@/hooks/use-orders";
 import { useToast } from "@/hooks/use-toast";
-import { Check, Minus, Plus, ShieldCheck, Truck, RotateCcw } from "lucide-react";
+import { Check, Minus, Plus, ShieldCheck, Truck, RotateCcw, ChevronDown } from "lucide-react";
 import { useI18n } from "@/i18n/I18nProvider";
 
 interface CartItem {
@@ -254,17 +253,25 @@ export default function Buy() {
                         <FormField control={form.control} name="shippingOption" render={({ field }) => (
                           <FormItem>
                             <FormLabel>{t("buy.shippingOption")}</FormLabel>
-                            <Select onValueChange={field.onChange} defaultValue={field.value}>
-                              <FormControl>
-                                <SelectTrigger>
-                                  <SelectValue placeholder={t("buy.shippingOption")} />
-                                </SelectTrigger>
-                              </FormControl>
-                              <SelectContent>
-                                <SelectItem value="home">{t("buy.shippingOption.home")}</SelectItem>
-                                <SelectItem value="center">{t("buy.shippingOption.center")}</SelectItem>
-                              </SelectContent>
-                            </Select>
+                            <div className="relative">
+                              <Button
+                                type="button"
+                                variant="outline"
+                                className="w-full h-9 justify-between px-3 py-2 text-sm shadow-sm"
+                              >
+                                <span className="truncate">
+                                  {field.value === "home" ? t("buy.shippingOption.home") : field.value === "center" ? t("buy.shippingOption.center") : t("buy.shippingOption")}
+                                </span>
+                                <ChevronDown className="w-4 h-4 opacity-50 shrink-0" />
+                              </Button>
+                              <select
+                                {...field}
+                                className="absolute inset-0 opacity-0 cursor-pointer"
+                              >
+                                <option value="home">{t("buy.shippingOption.home")}</option>
+                                <option value="center">{t("buy.shippingOption.center")}</option>
+                              </select>
+                            </div>
                             <FormMessage />
                           </FormItem>
                         )} />

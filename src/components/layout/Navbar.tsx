@@ -153,51 +153,63 @@ export function Navbar() {
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div 
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.2 }}
-            className="absolute top-full left-0 right-0 bg-white shadow-xl border-b border-border/50 py-4 px-4 md:hidden flex flex-col gap-4"
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className={cn(
+              "absolute top-full left-0 right-0 overflow-hidden md:hidden flex flex-col gap-4",
+              needsTransparentNav 
+                ? "bg-black/90 backdrop-blur-md shadow-xl border-b border-white/10" 
+                : "bg-white/90 backdrop-blur-md shadow-xl border-b border-border/50"
+            )}
           >
-            {navLinks.map((link) => (
-              <Link 
-                key={link.key} 
-                href={link.href}
-                onClick={() => setMobileMenuOpen(false)}
-                className={cn(
-                  "px-4 py-3 rounded-lg text-base font-medium transition-colors outline-none",
-                  location === link.href ? "bg-primary/5 text-primary" : "text-foreground hover:bg-gray-50"
-                )}
-              >
-                {t(link.key)}
-              </Link>
-            ))}
-            <div className="relative">
-              <Button 
-                type="button" 
-                variant="ghost" 
-                className="w-full h-auto px-4 py-3 rounded-lg text-base font-medium transition-colors outline-none justify-between"
-              >
-                <span>{LANGUAGES.find((l) => l.code === lang)?.label ?? lang}</span>
-                <ChevronDown className="w-4 h-4 opacity-70" />
-              </Button>
-              <select
-                aria-label="Language"
-                value={lang}
-                onChange={(e) => setLang(e.target.value as Language)}
-                className="absolute inset-0 opacity-0 cursor-pointer outline-none"
-              >
-                {LANGUAGES.map((l) => (
-                  <option key={l.code} value={l.code}>
-                    {l.label}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div className="px-4 pt-2 pb-2 border-t border-gray-100 mt-2">
-              <Link href="/buy" onClick={() => setMobileMenuOpen(false)} className="outline-none">
-                <Button className="w-full rounded-xl border-0" size="lg">{t("nav.buyNow")}</Button>
-              </Link>
+            <div className="py-4 px-4">
+              {navLinks.map((link) => (
+                <Link 
+                  key={link.key} 
+                  href={link.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={cn(
+                    "px-4 py-3 rounded-lg text-base font-medium transition-colors outline-none block mb-2",
+                    needsTransparentNav 
+                      ? (location === link.href ? "bg-white/10 text-white" : "text-white/90 hover:bg-white/10")
+                      : (location === link.href ? "bg-primary/5 text-primary" : "text-foreground hover:bg-gray-50")
+                  )}
+                >
+                  {t(link.key)}
+                </Link>
+              ))}
+              <div className="relative mb-2">
+                <Button 
+                  type="button" 
+                  variant="ghost" 
+                  className={cn(
+                    "w-full h-auto px-4 py-3 rounded-lg text-base font-medium transition-colors outline-none justify-between",
+                    needsTransparentNav ? "text-white/90 hover:bg-white/10" : ""
+                  )}
+                >
+                  <span>{LANGUAGES.find((l) => l.code === lang)?.label ?? lang}</span>
+                  <ChevronDown className="w-4 h-4 opacity-70" />
+                </Button>
+                <select
+                  aria-label="Language"
+                  value={lang}
+                  onChange={(e) => setLang(e.target.value as Language)}
+                  className="absolute inset-0 opacity-0 cursor-pointer outline-none"
+                >
+                  {LANGUAGES.map((l) => (
+                    <option key={l.code} value={l.code}>
+                      {l.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div className={cn("px-4 pt-2 pb-2 border-t mt-2", needsTransparentNav ? "border-white/10" : "border-gray-100")}>
+                <Link href="/buy" onClick={() => setMobileMenuOpen(false)} className="outline-none">
+                  <Button className="w-full rounded-xl border-0" size="lg">{t("nav.buyNow")}</Button>
+                </Link>
+              </div>
             </div>
           </motion.div>
         )}
