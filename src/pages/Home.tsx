@@ -82,7 +82,7 @@ export default function Home() {
       </section>
 
       {/* BRAND STORY */}
-      <section className="py-24 bg-white relative">
+      <section className="py-24 bg-white relative overflow-hidden">
         <div className="container mx-auto px-4 md:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <motion.h2 
